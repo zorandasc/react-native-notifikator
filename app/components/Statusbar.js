@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Pressable, Text } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 function Statusbar({ onPress, status }) {
