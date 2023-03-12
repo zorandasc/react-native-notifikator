@@ -65,7 +65,6 @@ export default function App() {
     } else {
       alert("Must use physical device for Push Notifications");
     }
-    return token;
   }
 
   useEffect(() => {
