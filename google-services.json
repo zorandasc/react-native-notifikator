@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "271696513442",
+    "project_id": "cvet-notifikator",
+    "storage_bucket": "cvet-notifikator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271696513442:android:02b9c5df2191e43d7e4afb",
+        "android_client_info": {
+          "package_name": "com.zorand666.Notification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271696513442-1l2grlskssko981i2c0cog2ejhki5sc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfboWL3eYSRCBDG3hB9trfCrOwjMJzJk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271696513442-1l2grlskssko981i2c0cog2ejhki5sc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+https://console.firebase.google.com/project/cvet-notifikator/settings/cloudmessaging/android:com.zorand666.Notification
+
+
+
+
+eas build -p android --profile preview
+
+this build .apk file for by hand instalation nto for deployment to googlep play.

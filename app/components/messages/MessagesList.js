@@ -1,0 +1,38 @@
+import React from "react";
+import { StyleSheet, FlatList, View, Text } from "react-native";
+import MessageItem from "./MessageItem";
+
+function MessagesList({ messages, onPressItem }) {
+  return (
+    <>
+      {messages.length < 1 ? (
+        <View>
+          <Text style={styles.text}>Nema notifikacija u aplikaciji</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={messages}
+          renderItem={(itemData, index) => {
+            return (
+              <MessageItem
+                item={itemData.item}
+                onPress={onPressItem}
+                key={index}
+              ></MessageItem>
+            );
+          }}
+        ></FlatList>
+      )}
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {},
+  text: {
+    color: "whitesmoke",
+    textAlign: "center",
+  },
+});
+
+export default MessagesList;
