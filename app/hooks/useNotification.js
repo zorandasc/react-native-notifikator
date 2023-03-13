@@ -21,14 +21,11 @@ Notifications.setNotificationHandler({
 export default useNotification = (notificationHandler) => {
   const notificationListener = useRef();
   const responseListener = useRef();
-  const [registerStatus, setRegisterStatus] = useState(null);
 
   useEffect(() => {
     registerForPushNotificationsAsync()
-      .then((status) => setRegisterStatus(status))
-      .catch((error) => {
-        console.log(error);
-      });
+      .then()
+      .catch((error) => alert(error));
 
     //ON RECEIVING NOTIFICATION
     notificationListener.current =
@@ -47,13 +44,10 @@ export default useNotification = (notificationHandler) => {
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
-
-  return registerStatus;
 };
 
 async function registerForPushNotificationsAsync() {
   let token;
-  let responseStatus;
 
   if (Platform.OS === "android") {
     await Notifications.setNotificationChannelAsync("default", {
@@ -78,9 +72,9 @@ async function registerForPushNotificationsAsync() {
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
     //pohrani ga na nas backend server
-    responseStatus = (await expoPushTokens.register(token)).status;
+    await expoPushTokens.register(token);
   } else {
     alert("Must use physical device for Push Notifications");
   }
-  return responseStatus;
+  return token;
 }

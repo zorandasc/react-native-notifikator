@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, FlatList, View, Text } from "react-native";
 import MessageItem from "./MessageItem";
 
-function MessagesList({ messages, onPressItem }) {
+function MessagesList({ messages, onPressItem, refreshing, onRefresh }) {
   return (
     <>
       {messages.length < 1 ? (
@@ -21,6 +21,8 @@ function MessagesList({ messages, onPressItem }) {
               ></MessageItem>
             );
           }}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
         ></FlatList>
       )}
     </>
