@@ -1,6 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Modal, Text, Button } from "react-native";
+import { View, StyleSheet, Modal, Text } from "react-native";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
+import AppButton from "../AppButton";
 
 function MessageModal(props) {
   if (!props.selectedItem) return;
@@ -23,18 +25,26 @@ function MessageModal(props) {
           </Text>
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button
+              <AppButton
                 title="Obrisi"
                 onPress={props.onDelete.bind(this, _id)}
                 color="#995678"
-              ></Button>
+              >
+                <FontAwesome name="trash-o" size={28} color="whitesmoke" />
+              </AppButton>
             </View>
             <View style={styles.button}>
-              <Button
+              <AppButton
                 title="Zatvori"
                 onPress={props.onCancel}
                 color="#7273c9"
-              ></Button>
+              >
+                <MaterialCommunityIcons
+                  name="exit-to-app"
+                  size={28}
+                  color="whitesmoke"
+                />
+              </AppButton>
             </View>
           </View>
         </View>
@@ -55,7 +65,7 @@ const styles = StyleSheet.create({
     padding: 16,
     width: "100%",
     backgroundColor: "whitesmoke",
-    opacity: 0.90,
+    opacity: 0.95,
     elevation: 16,
     borderRadius: 6,
   },

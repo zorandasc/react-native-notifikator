@@ -28,10 +28,18 @@ export default function App() {
     loadMessages();
   });
 
+  //on press list item
   function showMessageModal(id) {
     let newSelectedItem = messages.find((msg) => msg._id === id);
     setSelectedMessage(newSelectedItem);
+
     setModalVisible(true);
+
+    //AKO PORTUKA NIJE TOUCHOVANA NIKAD A SAD JE SELEKTOVANA
+    //PROMJENI touched STATUS
+    if (!newSelectedItem.touched) {
+      touchMessage(newSelectedItem);
+    }
   }
 
   function closeMessageModal() {
@@ -47,6 +55,26 @@ export default function App() {
       setMessages(orginalMessages);
     }
     setModalVisible(false);
+  };
+
+  const touchMessage = async (touchedMessage) => {
+    const orginalMessages = [...messages];
+
+    //LOKALNA PROMJENA
+    const changedMessages = messages.map((message) => {
+      if (message._id === touchedMessage._id) {
+        message.touched = true;
+      }
+      return message;
+    });
+    setMessages(changedMessages);
+
+    //PROMJENA NA SERVERU
+    const response = await messagesApi.touchMessage(touchedMessage._id);
+    if (!response.ok) {
+      //VRATI NA STARO AKO FAIL
+      setMessages(orginalMessages);
+    }
   };
 
   const loadMessages = async () => {
@@ -152,6 +180,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     fontSize: 18,
     color: "whitesmoke",
+    borderTopLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderWidth: 2,
+    borderColor: "whitesmoke",
   },
   errorContainer: {
     marginVertical: 16,

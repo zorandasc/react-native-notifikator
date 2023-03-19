@@ -1,8 +1,9 @@
 import React from "react";
 import { View, StyleSheet, Text, Pressable, Image } from "react-native";
-import { Fontisto } from "@expo/vector-icons";
+import { Fontisto, Feather } from "@expo/vector-icons";
 
 function MessageItem({ item, onPress }) {
+  //console.log(item);
   return (
     <Pressable
       android_ripple={{ color: "#aa4d7b" }}
@@ -19,7 +20,11 @@ function MessageItem({ item, onPress }) {
           <Text style={styles.itemText}>{item.email}</Text>
         </View>
         <View>
-          <Fontisto name="bell-alt" size={24} color="#aa4d7b" />
+          {item.touched ? (
+            <Feather name="gift" size={24} color="black" />
+          ) : (
+            <Fontisto name="bell-alt" size={24} color="#aa4d7b" />
+          )}
         </View>
       </View>
     </Pressable>
@@ -37,6 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     elevation: 16,
+    shadowColor: "#000",
   },
 
   cardBody: { alignItems: "center", flex: 1 },
