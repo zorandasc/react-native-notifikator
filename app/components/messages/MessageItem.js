@@ -6,13 +6,16 @@ function MessageItem({ item, onPress }) {
   //console.log(item);
   return (
     <Pressable
-      android_ripple={{ color: "#aa4d7b" }}
+      android_ripple={{ color: "#be6a94" }}
       onPress={onPress.bind(this, item._id)}
     >
       <View style={styles.itemCard}>
         <Image
-          source={require("../../assets/images/iconbouq.png")}
-          style={{ width: 60, height: 60, borderRadius: 30 }}
+          source={require("../../assets/icon.png")}
+          style={[
+            styles.image,
+            { backgroundColor: item.touched ? "#c4b4bc" : "#aa4d7b" },
+          ]}
         />
         <View style={styles.cardBody}>
           <Text style={styles.date}>{item.dateTime}</Text>
@@ -43,9 +46,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     elevation: 16,
     shadowColor: "#000",
+    borderTopLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
 
   cardBody: { alignItems: "center", flex: 1 },
+
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "#9e9198",
+  },
 
   itemText: {
     paddingVertical: 2,

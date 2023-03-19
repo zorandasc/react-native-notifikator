@@ -15,6 +15,8 @@ import messagesApi from "./app/api/messages";
 import MessagesList from "./app/components/messages/MessagesList";
 import MessageModal from "./app/components/messages/MessageModal";
 import useNotification from "./app/hooks/useNotification";
+import Counter from "./app/components/Counter";
+import AppButton from "./app/components/AppButton";
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -113,6 +115,7 @@ export default function App() {
         >
           <SafeAreaView style={styles.container}>
             <Text style={styles.header}>Svadbeni Cvet Notifikator</Text>
+            <Counter loading={loading}></Counter>
             <MessageModal
               visible={modalVisible}
               selectedItem={selectedMessage}
@@ -123,20 +126,24 @@ export default function App() {
               <ActivityIndicator
                 animating={loading}
                 size="large"
-                color="#4e0329"
+                color="whitesmoke"
               ></ActivityIndicator>
 
               {error ? (
                 <View style={styles.errorContainer}>
                   <Text style={styles.textError}>
-                    Greska u dobavljanu svadbenih poruka sa servera.{error}
+                    Greška u dobavljanju svadbenih poruka sa servera. {error}
                   </Text>
                   <View style={styles.buttonError}>
-                    <Button
+                    <AppButton
                       title="Retray"
                       onPress={loadMessages}
                       color="#7273c9"
-                    ></Button>
+                    >
+                      <Text style={{ color: "whitesmoke" }}>
+                        Pokušajte ponovo
+                      </Text>
+                    </AppButton>
                   </View>
                 </View>
               ) : (
@@ -175,7 +182,7 @@ const styles = StyleSheet.create({
   },
   header: {
     marginVertical: 12,
-    backgroundColor: "#aa4d7b",
+    backgroundColor: "#be6a94",
     textAlign: "center",
     paddingVertical: 12,
     fontSize: 18,
@@ -189,9 +196,11 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     backgroundColor: "#333",
     opacity: 0.9,
+    borderTopLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
   textError: {
-    color: "tomato",
+    color: "#ec8dbc",
     textAlign: "center",
     padding: 16,
   },

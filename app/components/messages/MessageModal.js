@@ -37,7 +37,7 @@ function MessageModal(props) {
               <AppButton
                 title="Zatvori"
                 onPress={props.onCancel}
-                color="#7273c9"
+                color="#9596d3"
               >
                 <MaterialCommunityIcons
                   name="exit-to-app"
@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
     opacity: 0.95,
     elevation: 16,
     borderRadius: 6,
+    borderTopLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
 
   textInput: {
