@@ -24,7 +24,7 @@ export default useNotification = (notificationHandler) => {
 
   useEffect(() => {
     registerForPushNotificationsAsync()
-      .then()
+      .then(async (token) => await expoPushTokens.register(token))
       .catch((error) => alert(error));
 
     //ON RECEIVING NOTIFICATION
@@ -64,17 +64,18 @@ async function registerForPushNotificationsAsync() {
     let finalStatus = existingStatus;
     if (existingStatus !== "granted") {
       const { status } = await Notifications.requestPermissionsAsync();
+
       finalStatus = status;
     }
     if (finalStatus !== "granted") {
-      alert("Failed to get push token for push notification!");
-      return;
+      throw new Error("Failed to get push token for push notification!");
+      //alert("Failed to get push token for push notification!");
+      //return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    //pohrani ga na nas backend server
-    await expoPushTokens.register(token);
   } else {
-    alert("Must use physical device for Push Notifications");
+    throw new Error("Must use physical device for Push Notifications");
+    //alert("Must use physical device for Push Notifications");
   }
   return token;
 }

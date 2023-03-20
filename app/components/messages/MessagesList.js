@@ -5,7 +5,7 @@ import MessageItem from "./MessageItem";
 function MessagesList({ messages, onPressItem, refreshing, onRefresh }) {
   return (
     <>
-      {messages.length < 1 ? (
+      {!messages || messages.length == 0 ? (
         <View>
           <Text style={styles.text}>Nema notifikacija u aplikaciji</Text>
         </View>

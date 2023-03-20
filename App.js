@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   ImageBackground,
   SafeAreaView,
   ActivityIndicator,
@@ -17,14 +16,19 @@ import MessageModal from "./app/components/messages/MessageModal";
 import useNotification from "./app/hooks/useNotification";
 import Counter from "./app/components/Counter";
 import AppButton from "./app/components/AppButton";
+import useApiWrapper from "./app/hooks/useApiWrapper";
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+
+  const {
+    data: messages,
+    error,
+    loading,
+    request: loadMessages,
+  } = useApiWrapper(messagesApi.getMessages);
 
   useNotification((notification) => {
     loadMessages();
@@ -77,17 +81,6 @@ export default function App() {
       //VRATI NA STARO AKO FAIL
       setMessages(orginalMessages);
     }
-  };
-
-  const loadMessages = async () => {
-    setLoading(true);
-    const response = await messagesApi.getMessages();
-    setLoading(false);
-
-    if (!response.ok) return setError(response.problem);
-
-    setError(false);
-    setMessages(response.data);
   };
 
   const onRefresh = () => {
