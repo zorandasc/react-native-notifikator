@@ -1,5 +1,6 @@
 https://console.firebase.google.com/project/cvet-notifikator/settings/cloudmessaging/android:com.zorand666.Notification
-
+//ovo nam vise ne treba posto koristiom nas node.js servera
+//pa nam ne treba ni google-services.json
 
 
 
