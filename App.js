@@ -30,9 +30,17 @@ export default function App() {
     request: loadMessages,
   } = useApiWrapper(messagesApi.getMessages);
 
+  //ON EVERY STARTUP TWO REQUEST GO TO OUR NODE SERVER, SIMLTANIUSLY. 
+  //THIS await expoPushTokens.register(token) IF GRANTED
   useNotification((notification) => {
     loadMessages();
   });
+
+  //AND THIS messagesApi.getMessages()
+  //THIS HAS NO RESTRICTION ABOUT AUTHORITY
+  useEffect(() => {
+    loadMessages();
+  }, []);
 
   //on press list item
   function showMessageModal(id) {
@@ -88,10 +96,6 @@ export default function App() {
     loadMessages();
     setRefreshing(false);
   };
-
-  useEffect(() => {
-    loadMessages();
-  }, []);
 
   return (
     <>

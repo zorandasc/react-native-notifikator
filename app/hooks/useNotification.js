@@ -68,7 +68,7 @@ async function registerForPushNotificationsAsync() {
       finalStatus = status;
     }
     if (finalStatus !== "granted") {
-      throw new Error("Failed to get push token for push notification!");
+      throw new Error("Dozvola za primanje notifikacija nije omogućena!");
       //alert("Failed to get push token for push notification!");
       //return;
     }
