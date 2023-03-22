@@ -25,12 +25,13 @@ export default function App() {
 
   const {
     data: messages,
+    setData: setMessages,
     error,
     loading,
     request: loadMessages,
   } = useApiWrapper(messagesApi.getMessages);
 
-  //ON EVERY STARTUP TWO REQUEST GO TO OUR NODE SERVER, SIMLTANIUSLY. 
+  //ON EVERY STARTUP TWO REQUEST GO TO OUR NODE SERVER, SIMLTANIUSLY.
   //THIS await expoPushTokens.register(token) IF GRANTED
   useNotification((notification) => {
     loadMessages();
@@ -52,7 +53,7 @@ export default function App() {
     //AKO PORTUKA NIJE TOUCHOVANA NIKAD A SAD JE SELEKTOVANA
     //PROMJENI touched STATUS
     if (!newSelectedItem.touched) {
-      touchMessage(newSelectedItem);
+      touchMessage(id);
     }
   }
 
@@ -62,33 +63,31 @@ export default function App() {
 
   const deleteMessage = async (id) => {
     const orginalMessages = [...messages];
-    setMessages((messages) => messages.filter((msg) => msg._id !== id));
 
+    //LOKALNA PROMJENA
+    const changedMessages = messages.filter((msg) => msg._id !== id);
+    setMessages(changedMessages);
+
+    //PROMJENA NA SERVERU
     const response = await messagesApi.deleteMessage(id);
-    if (!response.ok) {
-      setMessages(orginalMessages);
-    }
+    if (!response.ok) setMessages(orginalMessages);
+
     setModalVisible(false);
   };
 
-  const touchMessage = async (touchedMessage) => {
+  const touchMessage = async (id) => {
     const orginalMessages = [...messages];
 
     //LOKALNA PROMJENA
     const changedMessages = messages.map((message) => {
-      if (message._id === touchedMessage._id) {
-        message.touched = true;
-      }
+      if (message._id === id) message.touched = true;
       return message;
     });
     setMessages(changedMessages);
 
     //PROMJENA NA SERVERU
-    const response = await messagesApi.touchMessage(touchedMessage._id);
-    if (!response.ok) {
-      //VRATI NA STARO AKO FAIL
-      setMessages(orginalMessages);
-    }
+    const response = await messagesApi.touchMessage(id);
+    if (!response.ok) setMessages(orginalMessages); //VRATI NA STARO AKO FAIL
   };
 
   const onRefresh = () => {
