@@ -19,8 +19,22 @@ function MessageItem({ item, onPress }) {
         />
         <View style={styles.cardBody}>
           <Text style={styles.date}>{item.dateTime}</Text>
-          <Text style={styles.itemText}>{item.name}</Text>
-          <Text style={styles.itemText}>{item.email}</Text>
+          <Text
+            style={[
+              styles.itemText,
+              { fontWeight: item.touched ? "normal" : "bold" },
+            ]}
+          >
+            {item.name}
+          </Text>
+          <Text
+            style={[
+              styles.itemText,
+              { fontWeight: item.touched ? "normal" : "bold" },
+            ]}
+          >
+            {item.email}
+          </Text>
         </View>
         <View>
           {item.touched ? (
@@ -62,7 +76,6 @@ const styles = StyleSheet.create({
   itemText: {
     paddingVertical: 2,
     color: "#222",
-    fontWeight: "bold",
   },
   date: {
     paddingVertical: 2,
